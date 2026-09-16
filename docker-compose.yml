@@ -1,0 +1,36 @@
+services:
+  scout:
+    image: ghcr.io/simonalvhage/scout:latest
+    container_name: scout
+    restart: unless-stopped
+    init: true
+    ipc: host            # rekommenderas av Playwright för Chromium
+    ports:
+      - "8000:8000"
+    volumes:
+      - scout-data:/data
+    environment:
+      # --- GUI ---
+      SESSION_SECRET: "byt-mig-openssl-rand-hex-32"
+      COOKIE_SECURE: "true"          # false om du testar via http://ip:8000
+      MAX_USERS: "50"
+      MAX_TERMS: "20"
+      # --- AI ---
+      OPENAI_API_KEY: "sk-..."
+      OPENAI_MODEL: "gpt-4o-mini"
+      # --- Mejl (Gmail: app-lösenord) ---
+      SMTP_HOST: "smtp.gmail.com"
+      SMTP_PORT: "587"
+      SMTP_USER: "simon.alvhage@gmail.com"
+      SMTP_PASS: "xxxx xxxx xxxx xxxx"
+      ADMIN_EMAIL: "simon.alvhage@gmail.com"   # får mejl om ett jobb kraschar
+      # --- Schema ---
+      TZ: "Europe/Stockholm"
+      RUN_HOURS: "8,10,12,14,16,18,20,22"
+      RUN_MINUTE: "5"
+      RUN_ON_START: "false"
+      ENABLE_VINTED: "true"
+      ENABLE_MARKETPLACE: "true"
+
+volumes:
+  scout-data:

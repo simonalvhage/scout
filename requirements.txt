@@ -1,0 +1,9 @@
+fastapi==0.141.1
+uvicorn==0.53.0
+python-multipart==0.0.32
+itsdangerous==2.2.0
+vinted_scraper==5.0.0
+playwright==1.63.0
+beautifulsoup4==4.15.0
+openai==3.14.1
+tzdata==2026.4
